@@ -85,6 +85,40 @@ mean cuts       = 8.33
 
 Before the valid workload relaxation was added, the point cuts alone could force enumeration of nearly every assignment. The stronger master reduced the same development problems to the iteration counts above.
 
+## GitHub Actions validation
+
+A GitHub-hosted Ubuntu 24.04 runner validated the repository on:
+
+```text
+Python  3.12.14
+NumPy   2.5.2
+SciPy   1.18.1
+```
+
+The remote regression suite passed all **4/4 tests**.
+
+The CI smoke configuration used three independently generated problems with:
+
+```text
+jobs       6
+lines      2
+families   3
+```
+
+Runner-observed result:
+
+```text
+instance   status    iterations   cuts   objective   brute-force gap
+0          OPTIMAL        3         2      30.911       0.000e+00
+1          OPTIMAL        5         4      23.835       0.000e+00
+2          OPTIMAL       12        11      33.058       0.000e+00
+
+mean iterations = 6.67
+mean cuts       = 5.67
+```
+
+Every runner-side Benders objective matched the complete assignment-enumeration oracle exactly for these smoke instances. These values validate the implementation on the declared small model; they are not a scalability or industrial-performance claim.
+
 ## Tests
 
 - exact line sequencing vs explicit permutation enumeration;
